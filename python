@@ -1,0 +1,67 @@
+def display_question(question, options):
+    """
+    Display the question and its options to the user.
+    """
+    print(f"\n{question}")
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+
+
+def get_user_input():
+    """
+    Prompt the user for input and validate it.
+    """
+    while True:
+        try:
+            choice = int(input("Enter your choice (1-4): "))
+            if 1 <= choice <= 4:
+                return choice
+            else:
+                print("Invalid choice! Please enter a number between 1 and 4.")
+        except ValueError:
+            print("Invalid input! Please enter a number.")
+
+
+def quiz_game():
+    """
+    Main function to run the quiz game.
+    """
+    # Step 1: Define the quiz questions, options, and answers
+    questions = [
+        {
+            "question": "What is the capital of France?",
+            "options": ["Paris", "London", "Berlin", "Madrid"],
+            "answer": 1,
+        },
+        {
+            "question": "Which programming language is known as the backbone of web development?",
+            "options": ["Python", "JavaScript", "C++", "Java"],
+            "answer": 2,
+        },
+        {
+            "question": "Who wrote 'To Kill a Mockingbird'?",
+            "options": ["Harper Lee", "J.K. Rowling", "Jane Austen", "Mark Twain"],
+            "answer": 1,
+        },
+    ]
+
+    score = 0
+
+    # Step 2: Loop through each question
+    for q in questions:
+        display_question(q["question"], q["options"])
+        user_choice = get_user_input()
+
+        # Step 3: Check if the answer is correct
+        if user_choice == q["answer"]:
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Wrong! The correct answer was: {q['options'][q['answer'] - 1]}")
+
+    # Step 4: Display the final score
+    print(f"\nQuiz Over! You scored {score}/{len(questions)}.")
+
+# Step 5: Run the quiz
+if __name__ == "__main__":
+    quiz_game()
